@@ -33,6 +33,30 @@ _≟⁉_ : DecidableEquality Dir
 ‼ ≟⁉ ⁇ = no λ()
 ⁇ ≟⁉ ‼ = no λ()
 
+data End : Set where
+  close : End
+  wait  : End
+  ret   : End
+  acq   : End
+
+_≟End_ : DecidableEquality End
+close ≟End close = yes refl
+wait  ≟End wait  = yes refl
+ret   ≟End ret   = yes refl
+acq   ≟End acq   = yes refl
+close ≟End wait  = no λ()
+close ≟End ret   = no λ()
+close ≟End acq   = no λ()
+wait  ≟End close = no λ()
+wait  ≟End ret   = no λ()
+wait  ≟End acq   = no λ()
+ret   ≟End close = no λ()
+ret   ≟End wait  = no λ()
+ret   ≟End acq   = no λ()
+acq   ≟End close = no λ()
+acq   ≟End wait  = no λ()
+acq   ≟End ret   = no λ()
+
 
 ----------------------------------------------------------------------------------------------------
 -- Sessions can be traversed step by step. Here we define raw steps and raw paths. In
